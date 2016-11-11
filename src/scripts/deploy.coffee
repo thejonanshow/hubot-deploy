@@ -112,10 +112,13 @@ module.exports = (robot) ->
       msg.reply "#{name} is not allowed to be deployed from this room."
       return
 
-    user = robot.brain.userForId msg.envelope.user.id
-    token = robot.vault.forUser(user).get(TokenForBrain)
-    if token?
-      deployment.setUserToken(token)
+    if msg.envelope.user.id
+      user = robot.brain.userForId msg.envelope.user.id
+      token = robot.vault.forUser(user).get(TokenForBrain)
+      if token?
+        deployment.setUserToken(token)
+    else
+      JSON.stringify msg
 
     deployment.user   = user.id
     deployment.room   = msg.message.user.room
