@@ -118,7 +118,7 @@ module.exports = (robot) ->
       if token?
         deployment.setUserToken(token)
     else
-      JSON.stringify msg
+      console.log(JSON.stringify(msg.envelope))
 
     deployment.user   = user.id
     deployment.room   = msg.message.user.room
