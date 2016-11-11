@@ -118,9 +118,15 @@ module.exports = (robot) ->
       if token?
         deployment.setUserToken(token)
     else
-      console.log(JSON.stringify(msg.envelope))
+      user = "IFTTT"
 
-    deployment.user   = user.id
+    if user == "IFTTT"
+      deployment.user       = "IFTTT"
+      deployment.userName   = "IFTTT"
+    else
+      deployment.user      = user.id
+      deployment.userName  = user.name
+
     deployment.room   = msg.message.user.room
 
     if robot.adapterName is "flowdock"
@@ -133,7 +139,6 @@ module.exports = (robot) ->
 
     deployment.yubikey   = yubikey
     deployment.adapter   = robot.adapterName
-    deployment.userName  = user.name
     deployment.robotName = robot.name
 
     if process.env.HUBOT_DEPLOY_EMIT_GITHUB_DEPLOYMENTS
