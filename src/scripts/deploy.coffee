@@ -113,19 +113,18 @@ module.exports = (robot) ->
       return
 
     if msg.envelope.user.id
+      console.log "Found a user ID"
       user = robot.brain.userForId msg.envelope.user.id
       token = robot.vault.forUser(user).get(TokenForBrain)
       if token?
         deployment.setUserToken(token)
-    else
-      user = "IFTTT"
 
-    if user == "IFTTT"
-      deployment.user       = "IFTTT"
-      deployment.userName   = "IFTTT"
-    else
       deployment.user      = user.id
       deployment.userName  = user.name
+    else
+      console.log "No user ID"
+      deployment.user       = "IFTTT"
+      deployment.userName   = "IFTTT"
 
     deployment.room   = msg.message.user.room
 
