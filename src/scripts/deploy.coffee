@@ -122,7 +122,6 @@ module.exports = (robot) ->
       deployment.user      = user.id
       deployment.userName  = user.name
     else
-      console.log "No user ID"
       deployment.user       = "IFTTT"
       deployment.userName   = "IFTTT"
 
